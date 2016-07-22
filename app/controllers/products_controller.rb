@@ -10,16 +10,23 @@ class ProductsController < ApplicationController
   end
 
   def create
-    Product.create(
+    @products = Product.create(
     name: params[:name],
     price: params[:price],
     image: params[:image],
     description: params[:description]
     )
-    render 'index.html.erb'
+    @products.save
+    render 'create.html.erb'
   end
 
   def new
     render 'new.html.erb'
   end
+
+  def edit
+    @products = Product.find_by(id: params[:id])
+    render 'edit.html.erb'
+  end
+
 end

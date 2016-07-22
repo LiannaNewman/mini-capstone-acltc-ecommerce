@@ -1,7 +1,7 @@
 <h1> Hogwarts School Supplies Shop </h1>
 
 <% @products.each do |product| %>
-  <h3> <li> <a href="/products/<%=product.id%> >"> <%= product.name %> </li> </h3>
+  <h3> <li> <a href="/products/<%=product.id%> >"> <%= product.name %></a> </li> </h3>
   <li> <%= product.price %></li>
   <li> <img src= <%= product.image %> </li>
   <li> <%= product.description %> </li>
