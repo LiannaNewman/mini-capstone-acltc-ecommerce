@@ -1,8 +1,28 @@
 <h1> Hogwarts School Supplies Shop </h1>
 
-<ul>
-  <li><%=product.name%></li>
-  <li><%product.price%></li>
-  <li> href img src= "<%product.image%>" </li>
-  <li><%product.description%></li>
-</ul>
+<% @products.each do |product| %>
+  <h3> <li> <a href="/products/<%=product.id%> >"> <%= product.name %> </li> </h3>
+  <li> <%= product.price %></li>
+  <li> <img src= <%= product.image %> </li>
+  <li> <%= product.description %> </li>
+<% end %>
+
+
+<!-- <%= form_tag('/new_products', method: 'post') do %>
+  <%= label_tag(:name) %>
+  <%= text_field_tag(:name) %>
+
+  <%= label_tag(:price) %>
+  <%= text_field_tag(:price) %>
+
+  <%= label_tag(:image) %>
+  <%= text_field_tag(:image) %>
+
+  <%= label_tag(:description) %>
+  <%= text_field_tag(:description) %>
+
+<div>
+  <%= submit_tag("Create Product") %>
+</div>
+
+<% end %> -->

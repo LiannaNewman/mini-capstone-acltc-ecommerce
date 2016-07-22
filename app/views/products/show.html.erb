@@ -1,0 +1,11 @@
+<h1> Hogwarts School Supplies Shop </h1>
+
+<h1> Product Page </h1>
+
+  <h3> <li> <%= @products.name %></li> </h3>
+  <li> <%= @products.price %></li>
+  <li> <img src= <%= @products.image %> </li>
+  <li> <%= @products.description %> </li>
+
+  <h4>Back to All Products</h4>
+    <<%=link_to "Back to all products", "/products"%>
