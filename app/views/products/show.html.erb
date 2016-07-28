@@ -2,10 +2,18 @@
 
 <h1> Product Page </h1>
 
-  <h3> <li> <%= @products.name %></li> </h3>
-  <li> <%= @products.price %></li>
-  <li> <img src= <%= @products.image %> </li>
+  <h3> <li> <%= @products.name %> </li> </h3>
+  <h3> <%= @products.sale_message %> </h3>
+  <li> $<%= @products.price %> </li>
   <li> <%= @products.description %> </li>
+  <li> <%= @products.sale_message %></li>
+  <li> $<%= @products.tax %></li>
+  <li> $<%= @products.total %></li>
+     <img src="<%= @products.image %>">
 
-  <h4>Back to All Products</h4>
-    <<%=link_to "Back to all products", "/products"%>
+
+  <h4> <%= link_to "Edit Your Product", "/products/#{@products.id}/edit"%> </h4>
+
+  <h4> <%=link_to "Back to all products", "/products"%> </h4>
+  <h4> <%= link_to "Create a New Product", "/products/new" %> </h4>
+  <p> <%= link_to "Delete", "/products/#{@products.id}", method: "delete"%> </p>

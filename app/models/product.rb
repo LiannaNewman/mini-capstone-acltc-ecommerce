@@ -1,2 +1,21 @@
 class Product < ApplicationRecord
+
+  def sale_message
+    if price.to_i < 45
+      return "Discount Item!"
+    else
+      return "Not on Sale!"
+    end
+  end
+
+  def tax
+    (price.to_i * 0.09).round(2)
+  end
+
+  def total
+    price.to_i + (price.to_i * 0.09)
+  end
+
 end
+
+# Bonus: add styling to your discounted items so the price shows up in red
