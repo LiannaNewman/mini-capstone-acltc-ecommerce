@@ -1,10 +1,10 @@
 class ProductsController < ApplicationController
   def index
-    if params["blah"]
+    if params["sort"]
       @products = Product.order(params["sort"])
-    elsif params["blah_blah"] == "whatever"
+    elsif params["sort_desc"] == "whatever"
       @products = Product.order(price: :desc)
-    elsif params[:ha_ha_ha]
+    elsif params[:discount]
       @products = Product.where("price < ?", 45)
     else
       @products = Product.all
