@@ -1,19 +1,30 @@
 <h1> Hogwarts School Supplies Shop </h1>
 
-<h1> Product Page </h1>
+  <h1> <%= @products.name %></h1>
 
-  <h3> <li> <%= @products.name %> </li> </h3>
-  <h3> <%= @products.sale_message %> </h3>
-  <li> $<%= @products.price %> </li>
-  <li> <%= @products.description %> </li>
+
+  <hl> <%= @products.sale_message %> </h3>
+  <li> Price $<%= @products.price %> </li>
+  <li> Description <%= @products.description %> </li>
   <li> <%= @products.sale_message %></li>
-  <li> $<%= @products.tax %></li>
-  <li> $<%= @products.total %></li>
+  <li> Tax: $<%= @products.tax %></li>
+  <li> Total: $<%= @products.total %></li>
      <img src="<%= @products.image %>">
 
 
-  <h4> <%= link_to "Edit Your Product", "/products/#{@products.id}/edit"%> </h4>
+<%= form_tag '/orders', method: :post do  %>
+  <div>
+    <%= label_tag :quantity %>
+    <%= text_field_tag :quantity %>
+  </div>
 
+  <div>
+    <p> Product ID: <%= label_tag (@products.id) %> </p>
+    <%= text_field_tag :product_id, @products.id %>
+  </div>
+  <%= submit_tag "Buy Now!" %>
+<% end %>
+
+  <h4> <%= link_to "Edit Your Product", "/products/#{@products.id}/edit"%> </h4>
   <h4> <%=link_to "Back to all products", "/products"%> </h4>
-  <h4> <%= link_to "Create a New Product", "/products/new" %> </h4>
   <p> <%= link_to "Delete", "/products/#{@products.id}", method: "delete"%> </p>

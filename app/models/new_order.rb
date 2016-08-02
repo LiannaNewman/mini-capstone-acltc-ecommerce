@@ -1,0 +1,2 @@
+class NewOrder < ApplicationRecord
+end

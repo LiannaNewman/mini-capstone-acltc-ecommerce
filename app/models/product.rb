@@ -1,4 +1,5 @@
 class Product < ApplicationRecord
+has_many :category
 
   def sale_message
     if price.to_i < 45
