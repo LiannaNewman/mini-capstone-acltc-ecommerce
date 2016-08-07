@@ -1,5 +1,14 @@
 <h1> Here are your Order Details</h1>
 
-<h3> Order ID# <%= @order.id %> </h3>
-<h3> Order Quantity: <%= @order.quantity %> </h3>
-<h3> Product ID: <%= @order.product_id %> </h3>
+<h3> Order ID# <%= @order.id %></h3>
+
+<h4>
+<% cart = CartedProduct.where("user_id = ? AND status = ?", current_user.id, "Carted") %>
+<% cart.each do |item| %>
+     <%= item %>
+     <% end %>
+</h4>
+
+<h4>Subtotal: $<%= @order.subtotal %></h4>
+<h4>Tax: $<%= @order.tax%></h4>
+<h4>Total: $<%= @order.total%></h4>

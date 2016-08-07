@@ -6,13 +6,18 @@
   <hl> <%= @products.sale_message %> </h3>
   <li> Price $<%= @products.price %> </li>
   <li> Description <%= @products.description %> </li>
+  <li> Categories:
+      <% @products.categories.each do |category| %>
+            <li> <%=category.name%> </li>
+          <% end %>
+
   <li> <%= @products.sale_message %></li>
   <li> Tax: $<%= @products.tax %></li>
   <li> Total: $<%= @products.total %></li>
      <img src="<%= @products.image %>">
 
 
-<%= form_tag '/orders', method: :post do  %>
+<%= form_tag('/carted_products', method: :post) do  %>
   <div>
     <%= label_tag :quantity %>
     <%= text_field_tag :quantity %>
@@ -22,7 +27,7 @@
     <p> Product ID: <%= label_tag (@products.id) %> </p>
     <%= text_field_tag :product_id, @products.id %>
   </div>
-  <%= submit_tag "Buy Now!" %>
+  <%= submit_tag "Add to Cart!" %>
 <% end %>
 
   <h4> <%= link_to "Edit Your Product", "/products/#{@products.id}/edit"%> </h4>

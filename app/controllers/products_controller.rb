@@ -10,7 +10,13 @@ class ProductsController < ApplicationController
       @products = Product.all
     end
     render 'index.html.erb'
+    if params[:category]
+      category = Category.find_by(name: params[:category])
+      @products = category.product
+    end
   end
+
+
 
   def show
     @products = Product.find_by(id: params[:id])

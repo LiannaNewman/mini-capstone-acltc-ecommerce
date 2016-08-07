@@ -1,11 +1,20 @@
 class OrdersController < ApplicationController
   def create
     order = Order.new(
-    quantity: params[:quantity],
     user_id: current_user.id,
-    product_id: params[:product_id]
     )
+    order.order_subtotal
+    order.order_tax
+    order.order_total
     order.save
+    cart = CartedProduct.where("user_id = ? AND status = ?", current_user.id, "Carted")
+    cart.each do |item|
+      if item.status == "Carted"
+         item.status = "Purchased"
+      end
+      item.order_id = order.id
+      item.save
+    end
     redirect_to "/orders/#{order.id}"
   end
 
