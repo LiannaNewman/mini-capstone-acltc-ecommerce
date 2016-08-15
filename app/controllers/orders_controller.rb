@@ -15,11 +15,14 @@ class OrdersController < ApplicationController
       item.order_id = order.id
       item.save
     end
+    session[:cart_count] = nil
     redirect_to "/orders/#{order.id}"
   end
 
   def show
     @order = Order.find_by(id: params[:id])
+    if @order.user_id == current_user.idea
+      @carted_products = @order.current_products
+    else redirect_to "/login"
   end
-
 end

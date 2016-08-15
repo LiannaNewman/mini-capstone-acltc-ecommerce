@@ -1,7 +1,7 @@
 <h1> Edit your product details </h1>
 
-<%= form_tag("/products", method: "post") do %>
-    <div>
+<%= form_tag("/products/#{@products.id}", method: "patch") do %>
+    <!-- <div>
       <%= label_tag(:name) %>
       <%= text_field_tag(:name, @products.name) %>
     </div>
@@ -19,9 +19,7 @@
     <div>
       <%= label_tag(:description) %>
       <%= text_field_tag(:description, @products.description) %>
-    </div>
-
-    <div>
+    </div> -->
+    <%= render 'form' %>
       <%= submit_tag("Edit Product") %>
-    </div>
 <% end %>

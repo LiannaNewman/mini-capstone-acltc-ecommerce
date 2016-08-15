@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+skip_before_filter :calculate_cart_count
   def new
     render 'new.html.erb'
   end
@@ -17,6 +18,7 @@ class SessionsController < ApplicationController
 
   def destroy
     session[:user_id] = nil
+    session[:cart_count] = nil
     flash[:success] = 'Successfully logged out!'
     redirect_to '/login'
   end

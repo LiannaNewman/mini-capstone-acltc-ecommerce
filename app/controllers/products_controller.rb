@@ -1,4 +1,6 @@
 class ProductsController < ApplicationController
+  before_action :authorize_admin!, except: [:index, :show]
+
   def index
     if params["sort"]
       @products = Product.order(params["sort"])
@@ -16,8 +18,6 @@ class ProductsController < ApplicationController
     end
   end
 
-
-
   def show
     @products = Product.find_by(id: params[:id])
     render 'show.html.erb'
@@ -25,18 +25,23 @@ class ProductsController < ApplicationController
 
   def create
     @products = Product.create(
-    name: params[:name],
-    price: params[:price],
-    image: params[:image],
-    description: params[:description]
+      name: params[:name],
+      price: params[:price],
+      image: params[:image],
+      description: params[:description]
     )
-    @products.save
-    flash[:success] = "#{@products.name} has been created!"
-    redirect_to "/products/#{@products.id}"
+    if @products.valid?
+      flash[:success] = "#{@products.name} has been created!"
+      redirect_to "/products/#{@products.id}"
+    else
+      flash[:danger] = @products.errors.full_messages
+      render "new.html.erb"
+    end
   end
 
   def new
-    render 'new.html.erb'
+    @products = Product.new
+    render "new.html.erb"
   end
 
   def edit
@@ -47,21 +52,25 @@ class ProductsController < ApplicationController
   def update
     @products = Product.find_by(id: params[:id])
     @products.update(
-    name: params[:name],
-    price: params[:price],
-    image: params[:image],
-    description: params[:description]
+      name: params[:name],
+      price: params[:price],
+      image: params[:image],
+      description: params[:description]
     )
-    @products.save
-    flash[:success] = "#{@products.name} has been updated!"
-    redirect_to "/products/#{@products.id}"
+    if @products.valid?
+      flash[:success] = "#{@products.name} has been updated!"
+      redirect_to "/products/#{@products.id}"
+    else
+      flash[:danger] = @products.errors.full_messages
+      render "edit.html.erb"
+    end
   end
 
   def destroy
+    authorize_user!
     @product = Product.find_by(id: params[:id])
     @product.destroy
     flash[:success] = "#{@products.name} has been deleted!"
     redirect_to "/products/#{@products.id}"
   end
-
 end
